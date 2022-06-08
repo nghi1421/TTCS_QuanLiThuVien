@@ -86,6 +86,7 @@ namespace CSPT_NGANHANG
             this.btnDangNhap.TabIndex = 6;
             this.btnDangNhap.Text = "Đăng nhập";
             this.btnDangNhap.UseVisualStyleBackColor = true;
+            this.btnDangNhap.Click += new System.EventHandler(this.btnDangNhap_Click);
             this.btnDangNhap.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnDangNhap_MouseClick);
             // 
             // btnThoat

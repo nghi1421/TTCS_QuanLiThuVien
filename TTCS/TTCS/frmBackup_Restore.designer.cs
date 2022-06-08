@@ -314,7 +314,7 @@ namespace ttcs
             0,
             0,
             0});
-            this.spinEdit1.Size = new System.Drawing.Size(79, 24);
+            this.spinEdit1.Size = new System.Drawing.Size(79, 22);
             this.spinEdit1.TabIndex = 22;
             this.spinEdit1.EditValueChanged += new System.EventHandler(this.spinEdit1_EditValueChanged);
             // 
@@ -472,7 +472,7 @@ namespace ttcs
             0,
             0,
             0});
-            this.spinEdit3.Size = new System.Drawing.Size(62, 24);
+            this.spinEdit3.Size = new System.Drawing.Size(62, 22);
             this.spinEdit3.TabIndex = 36;
             this.spinEdit3.EditValueChanged += new System.EventHandler(this.spinEdit3_EditValueChanged);
             // 
@@ -664,7 +664,7 @@ namespace ttcs
             0,
             0,
             0});
-            this.spinEdit2.Size = new System.Drawing.Size(79, 24);
+            this.spinEdit2.Size = new System.Drawing.Size(79, 22);
             this.spinEdit2.TabIndex = 52;
             // 
             // label16
@@ -697,7 +697,7 @@ namespace ttcs
             0,
             0,
             0});
-            this.spinEdit4.Size = new System.Drawing.Size(79, 24);
+            this.spinEdit4.Size = new System.Drawing.Size(79, 22);
             this.spinEdit4.TabIndex = 54;
             // 
             // label17
@@ -760,7 +760,7 @@ namespace ttcs
             0,
             0,
             0});
-            this.spinEdit5.Size = new System.Drawing.Size(79, 24);
+            this.spinEdit5.Size = new System.Drawing.Size(79, 22);
             this.spinEdit5.TabIndex = 59;
             // 
             // label19
@@ -948,7 +948,8 @@ namespace ttcs
             this.Controls.Add(this.label3);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Backup Restore";
+            this.TransparencyKey = System.Drawing.SystemColors.ActiveBorder;
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit1.Properties)).EndInit();

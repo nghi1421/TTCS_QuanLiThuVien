@@ -20,15 +20,6 @@ namespace CSPT_NGANHANG
         {
             InitializeComponent();
         }
-
-
-        /******************************************************************
-         * Để tránh việc người dùng ấn vào 1 form đến 2 lần chúng ta 
-         * cần sử dụng hàm này để kiểm tra xem cái form hiện tại đã 
-         * có trong bộ nhớ chưa
-         * Nếu có trả về "f"
-         * Nếu không trả về "null"
-         ******************************************************************/
         private Form CheckExists(Type ftype)
         {
             foreach (Form f in this.MdiChildren)
@@ -52,6 +43,41 @@ namespace CSPT_NGANHANG
                 return;
             }
 
+             String cauTruyVan = "DECLARE @RESULT INT" +
+                "EXEC @RESULT = SP_KIEMTRA_QUYEN " + txtTenDangNhap.Text.Trim() + "" +
+                "SELECT @RESULT ";
+         
+            SqlCommand sqlCommand = new SqlCommand(cauTruyVan, Program.conn);
+            try
+            {
+                Program.myReader = Program.ExecSqlDataReader(cauTruyVan);
+                /*khong co ket qua tra ve thi ket thuc luon*/
+                if (Program.myReader == null)
+                {
+                    MessageBox.Show("Thực thi database thất bại!", "Thông báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Program.conn.ConnectionString = "";
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Thực thi database thất bại!\n\n" + ex.Message, "Thông báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine(ex.Message);
+                Program.conn.ConnectionString = "";
+                return;
+            }
+
+            Program.myReader.Read();
+            int result = int.Parse(Program.myReader.GetValue(0).ToString());
+            Program.myReader.Close();
+            if(result == 0)
+            {
+                MessageBox.Show("Login không có quyền sử dụng phần mềm", "Thông báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             Program.mlogin = txtTenDangNhap.Text.Trim();
             Program.password = txtMatKhau.Text.Trim();
@@ -63,46 +89,16 @@ namespace CSPT_NGANHANG
                 MessageBox.Show("Đăng nhập thành công!", "Thông Báo", MessageBoxButtons.OK);
 
             }
-
-
-          /*  String statement = "EXEC SP_DANGNHAP '" + Program.loginName + "'";// exec sp_DangNhap 'TP'
-            Program.myReader = Program.ExecSqlDataReader(statement);*/
-
-/*            if (Program.myReader == null)
-                return;*/
-            // đọc một dòng của myReader - điều này là hiển nhiên vì kết quả chỉ có 1 dùng duy nhất
-//            Program.myReader.Read();
-
-            /*Program.userName = Program.myReader.GetString(0);// lấy userName(Mã nhân viên)
-            if (Convert.IsDBNull(Program.userName))
-            {
-                MessageBox.Show("Tài khoản này không có quyền truy cập \n Hãy thử tài khoản khác", "Thông Báo", MessageBoxButtons.OK);
-            }
-
-            Program.staff = Program.myReader.GetString(1);
-            Program.role = Program.myReader.GetString(2);
-
-            Program.myReader.Close();
-            Program.conn.Close();
-            
-
-            Program.FormChinh.ssMaNv.Text = $"Mã nhân viên: " + Program.userName;
-            Program.FormChinh.ssHoTen.Text = "Họ tên: " + Program.staff;
-            Program.FormChinh.ssVaiTro.Text = "Vai trò: " + Program.role;
-
-            this.Visible = false;
-            Program.FormChinh.enableButtons();*/
             this.Visible = false;
         }
 
         private void frmDangNhap_Load(object sender, EventArgs e)
         {
-            // đặt sẵn mật khẩu để đỡ nhập lại nhiều lần
-/*            txtTenDangNhap.Text = "sa";// nguyen long - chi nhanh
-            txtMatKhau.Text = "123123";
-            if (KetNoiDatabaseGoc() == 0)
-                return;*/
         }
 
+        private void btnDangNhap_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

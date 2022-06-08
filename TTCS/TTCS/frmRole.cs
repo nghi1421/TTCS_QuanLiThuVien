@@ -65,7 +65,7 @@ namespace TTCS
             SqlDataReader reader;
             if (sua == true)
             {
-                reader = Program.ExecSqlDataReader("select name from sys.sysusers where name = '" + nameTextEdit.Text + "'");
+                reader = Program.ExecSqlDataReader("select name from sys.sysusers where name = '" + nameTextEdit.Text.Trim() + "'");
                 if(reader.HasRows && !oldName.Equals(nameTextEdit.Text))
                 {
                     MessageBox.Show("Ten role ton tai hoac trung ten user!");
@@ -73,25 +73,25 @@ namespace TTCS
                     return;
                 }
                 Program.ExecSqlNonQuery("alter role " + oldName + " with name = " + nameTextEdit.Text);
-                if (!checkBoxdb_access.Checked) Program.ExecSqlNonQuery("Exec sp_droprolemember '" + checkBoxdb_access.Text + "','" + nameTextEdit.Text + "'");
-                if (!checkBoxdb_backup.Checked) Program.ExecSqlNonQuery("Exec sp_droprolemember '" + checkBoxdb_backup.Text + "','" + nameTextEdit.Text + "'");
-                if (!checkBoxdb_datareader.Checked) Program.ExecSqlNonQuery("Exec sp_droprolemember '" + checkBoxdb_datareader.Text + "','" + nameTextEdit.Text + "'");
-                if (!checkBoxdb_datawriter.Checked) Program.ExecSqlNonQuery("Exec sp_droprolemember '" + checkBoxdb_datawriter.Text + "','" + nameTextEdit.Text + "'");
-                if (!checkBoxdb_ddladmin.Checked) Program.ExecSqlNonQuery("Exec sp_droprolemember '" + checkBoxdb_ddladmin.Text + "','" + nameTextEdit.Text + "'");
-                if (!checkBoxdb_denyr.Checked) Program.ExecSqlNonQuery("Exec sp_droprolemember '" + checkBoxdb_denyr.Text + "','" + nameTextEdit.Text + "'");
-                if (!checkBoxdb_denyw.Checked) Program.ExecSqlNonQuery("Exec sp_droprolemember '" + checkBoxdb_denyw.Text + "','" + nameTextEdit.Text + "'");
-                if (!checkBoxdb_owner.Checked) Program.ExecSqlNonQuery("Exec sp_droprolemember '" + checkBoxdb_owner.Text + "','" + nameTextEdit.Text + "'");
-                if (!checkBoxdb_sercurity.Checked) Program.ExecSqlNonQuery("Exec sp_droprolemember '" + checkBoxdb_sercurity.Text + "','" + nameTextEdit.Text + "'");
+                if (!checkBoxdb_access.Checked) Program.ExecSqlNonQuery("Exec sp_droprolemember '" + checkBoxdb_access.Text + "','" + nameTextEdit.Text.Trim() + "'");
+                if (!checkBoxdb_backup.Checked) Program.ExecSqlNonQuery("Exec sp_droprolemember '" + checkBoxdb_backup.Text + "','" + nameTextEdit.Text.Trim() + "'");
+                if (!checkBoxdb_datareader.Checked) Program.ExecSqlNonQuery("Exec sp_droprolemember '" + checkBoxdb_datareader.Text + "','" + nameTextEdit.Text.Trim() + "'");
+                if (!checkBoxdb_datawriter.Checked) Program.ExecSqlNonQuery("Exec sp_droprolemember '" + checkBoxdb_datawriter.Text + "','" + nameTextEdit.Text.Trim() + "'");
+                if (!checkBoxdb_ddladmin.Checked) Program.ExecSqlNonQuery("Exec sp_droprolemember '" + checkBoxdb_ddladmin.Text + "','" + nameTextEdit.Text.Trim() + "'");
+                if (!checkBoxdb_denyr.Checked) Program.ExecSqlNonQuery("Exec sp_droprolemember '" + checkBoxdb_denyr.Text + "','" + nameTextEdit.Text.Trim() + "'");
+                if (!checkBoxdb_denyw.Checked) Program.ExecSqlNonQuery("Exec sp_droprolemember '" + checkBoxdb_denyw.Text + "','" + nameTextEdit.Text.Trim() + "'");
+                if (!checkBoxdb_owner.Checked) Program.ExecSqlNonQuery("Exec sp_droprolemember '" + checkBoxdb_owner.Text + "','" + nameTextEdit.Text.Trim() + "'");
+                if (!checkBoxdb_sercurity.Checked) Program.ExecSqlNonQuery("Exec sp_droprolemember '" + checkBoxdb_sercurity.Text + "','" + nameTextEdit.Text.Trim() + "'");
 
-                if (checkBoxdb_access.Checked) Program.ExecSqlNonQuery("Exec sp_addrolemember '" + checkBoxdb_access.Text + "','" + nameTextEdit.Text + "'");
-                if (checkBoxdb_backup.Checked) Program.ExecSqlNonQuery("Exec sp_addrolemember '" + checkBoxdb_backup.Text + "','" + nameTextEdit.Text + "'");
-                if (checkBoxdb_datareader.Checked) Program.ExecSqlNonQuery("Exec sp_addrolemember '" + checkBoxdb_datareader.Text + "','" + nameTextEdit.Text + "'");
-                if (checkBoxdb_datawriter.Checked) Program.ExecSqlNonQuery("Exec sp_addrolemember '" + checkBoxdb_datawriter.Text + "','" + nameTextEdit.Text + "'");
-                if (checkBoxdb_ddladmin.Checked) Program.ExecSqlNonQuery("Exec sp_addrolemember '" + checkBoxdb_ddladmin.Text + "','" + nameTextEdit.Text + "'");
-                if (checkBoxdb_denyr.Checked) Program.ExecSqlNonQuery("Exec sp_addrolemember '" + checkBoxdb_denyr.Text + "','" + nameTextEdit.Text + "'");
-                if (checkBoxdb_denyw.Checked) Program.ExecSqlNonQuery("Exec sp_addrolemember '" + checkBoxdb_denyw.Text + "','" + nameTextEdit.Text + "'");
-                if (checkBoxdb_owner.Checked) Program.ExecSqlNonQuery("Exec sp_addrolemember '" + checkBoxdb_owner.Text + "','" + nameTextEdit.Text + "'");
-                if (checkBoxdb_sercurity.Checked) Program.ExecSqlNonQuery("Exec sp_addrolemember '" + checkBoxdb_sercurity.Text + "','" + nameTextEdit.Text + "'");
+                if (checkBoxdb_access.Checked) Program.ExecSqlNonQuery("Exec sp_addrolemember '" + checkBoxdb_access.Text + "','" + nameTextEdit.Text.Trim() + "'");
+                if (checkBoxdb_backup.Checked) Program.ExecSqlNonQuery("Exec sp_addrolemember '" + checkBoxdb_backup.Text + "','" + nameTextEdit.Text.Trim() + "'");
+                if (checkBoxdb_datareader.Checked) Program.ExecSqlNonQuery("Exec sp_addrolemember '" + checkBoxdb_datareader.Text + "','" + nameTextEdit.Text.Trim() + "'");
+                if (checkBoxdb_datawriter.Checked) Program.ExecSqlNonQuery("Exec sp_addrolemember '" + checkBoxdb_datawriter.Text + "','" + nameTextEdit.Text.Trim() + "'");
+                if (checkBoxdb_ddladmin.Checked) Program.ExecSqlNonQuery("Exec sp_addrolemember '" + checkBoxdb_ddladmin.Text + "','" + nameTextEdit.Text.Trim() + "'");
+                if (checkBoxdb_denyr.Checked) Program.ExecSqlNonQuery("Exec sp_addrolemember '" + checkBoxdb_denyr.Text + "','" + nameTextEdit.Text.Trim() + "'");
+                if (checkBoxdb_denyw.Checked) Program.ExecSqlNonQuery("Exec sp_addrolemember '" + checkBoxdb_denyw.Text + "','" + nameTextEdit.Text.Trim() + "'");
+                if (checkBoxdb_owner.Checked) Program.ExecSqlNonQuery("Exec sp_addrolemember '" + checkBoxdb_owner.Text + "','" + nameTextEdit.Text.Trim() + "'");
+                if (checkBoxdb_sercurity.Checked) Program.ExecSqlNonQuery("Exec sp_addrolemember '" + checkBoxdb_sercurity.Text + "','" + nameTextEdit.Text.Trim() + "'");
                 database_principalsGridControl.Enabled = true;
                 this.database_principalsTableAdapter.Fill(this.quanLiThuVienDataSet.database_principals);
                 this.dataTable1TableAdapter.Fill(this.quanLiThuVienDataSet.DataTable1);
@@ -105,6 +105,7 @@ namespace TTCS
                 database_principalsGridControl.Enabled = true;
                 sua = false;
                 panelControl1.Enabled = false;
+                reader.Close();
                 return;
             }
             

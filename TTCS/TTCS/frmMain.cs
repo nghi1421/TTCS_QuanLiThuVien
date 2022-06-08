@@ -16,8 +16,7 @@ namespace TTCS
         public frmMain()
         {
             InitializeComponent();
-            Program.conn.ConnectionString = Program.connstr_publisher;
-
+/*            Program.conn.ConnectionString = Program.connstr_publisher;
             Form frm = this.CheckExists(typeof(frmDangNhap));
             if (frm != null) frm.Activate();
             else
@@ -25,7 +24,7 @@ namespace TTCS
                 frmDangNhap f = new frmDangNhap();
                 f.MdiParent = this;
                 f.Show();
-            }
+            }*/
 
         }
         private Form CheckExists(Type ftype)
