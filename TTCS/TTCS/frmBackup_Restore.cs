@@ -214,7 +214,7 @@ namespace ttcs
                        
                         Console.WriteLine(sqlStmt2);
                         SqlCommand bu2 = new SqlCommand(sqlStmt2, Program.conn);
-                        //bu2.ExecuteNonQuery();
+                        bu2.ExecuteNonQuery();
                     }
                     
 
@@ -347,6 +347,7 @@ namespace ttcs
 
         private void button5_Click(object sender, EventArgs e)
         {
+
             if (textBox1.Text.Trim() == "")
             {
                 MessageBox.Show("Type supplan name..!");
@@ -372,9 +373,9 @@ namespace ttcs
             string sql;
             int subdaytype = 0; ;
             int subdayinterval;
-            int freq_type ;
+            int freq_type;
             int freq_recurrence_factor = 0;
-            int freq_interval = (int) spinEdit1.Value;
+            int freq_interval = (int)spinEdit1.Value;
             int f_relative_interval = 0;
             if (cbFreOc.SelectedIndex == 0)
             {
@@ -382,7 +383,7 @@ namespace ttcs
             }
             else if (cbFreOc.SelectedIndex == 1)
             {
-                if(!mc1.Checked && !mc2.Checked && !mc3.Checked && !mc4.Checked &&
+                if (!mc1.Checked && !mc2.Checked && !mc3.Checked && !mc4.Checked &&
                     !mc6.Checked && !mc5.Checked && !mc7.Checked)
                 {
                     MessageBox.Show("freq_interval is invalid ");
@@ -402,7 +403,7 @@ namespace ttcs
             }
             else
             {
-                
+
                 if (radioButton6.Checked)//monthly
                 {
                     freq_type = 16;
@@ -413,7 +414,7 @@ namespace ttcs
                 {
                     freq_type = 32;
                     if (comboBox3.SelectedIndex == 0) freq_interval = 2;
-                    else if(comboBox3.SelectedIndex == 1) freq_interval = 3;
+                    else if (comboBox3.SelectedIndex == 1) freq_interval = 3;
                     else if (comboBox3.SelectedIndex == 2) freq_interval = 4;
                     else if (comboBox3.SelectedIndex == 3) freq_interval = 5;
                     else if (comboBox3.SelectedIndex == 4) freq_interval = 6;
@@ -422,7 +423,7 @@ namespace ttcs
                     else if (comboBox3.SelectedIndex == 7) freq_interval = 8;
                     else if (comboBox3.SelectedIndex == 8) freq_interval = 9;
                     else if (comboBox3.SelectedIndex == 9) freq_interval = 10;
-                    freq_recurrence_factor = (int) spinEdit5.Value;
+                    freq_recurrence_factor = (int)spinEdit5.Value;
                     if (comboBox1.SelectedIndex == 0) f_relative_interval = 1;
                     else if (comboBox1.SelectedIndex == 1) f_relative_interval = 2;
                     else if (comboBox1.SelectedIndex == 2) f_relative_interval = 4;
@@ -435,7 +436,8 @@ namespace ttcs
             if (radioButton4.Checked)
             {
                 endday = "99991231";
-            } else endday = dateTimePicker2.Value.ToString("yyyyMMdd");
+            }
+            else endday = dateTimePicker2.Value.ToString("yyyyMMdd");
 
             if (radioButton2.Checked)
             {
@@ -455,18 +457,19 @@ namespace ttcs
                 subdayinterval = 0;
                 subdaytype = 1;
             }
-            if(radioButton8.Checked)
-            sql = "use quanlithuvien exec back_up_full_2 " + textBox1.Text + "," + freq_type.ToString() + "," +freq_interval + "," +
-                subdaytype.ToString() + "," + subdayinterval + "," + freq_recurrence_factor + "," + f_relative_interval 
-                + "," + startday + "," + endday + "," + starttime + "," + endtime;
+            if (radioButton8.Checked)
+                sql = "use quanlithuvien exec back_up_full " + textBox1.Text + "," + freq_type.ToString() + "," + freq_interval + "," +
+                    subdaytype.ToString() + "," + subdayinterval + "," + freq_recurrence_factor + "," + f_relative_interval
+                    + "," + startday + "," + endday + "," + starttime + "," + endtime;
             else sql = "use quanlithuvien exec back_up_diff " + textBox1.Text + "," + freq_type.ToString() + "," + freq_interval + "," +
                 subdaytype.ToString() + "," + subdayinterval + "," + freq_recurrence_factor + "," + f_relative_interval
                 + "," + startday + "," + endday + "," + starttime + "," + endtime;
             Console.WriteLine(sql);
-            if (Program.ExecSqlNonQuery(sql) == 1)
+            if (Program.ExecSqlNonQuery(sql) == 0)
             {
                 MessageBox.Show("Success");
             }
+
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)

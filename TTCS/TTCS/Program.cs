@@ -16,9 +16,9 @@ namespace TTCS
         /// </summary>
         public static SqlConnection conn = new SqlConnection();
         public static String connstr;
-        public static String connstr_publisher = "Data Source=localhost; Initial Catalog = QuanLiThuVien; Integrated Security = true; MultipleActiveResultSets=true";
+        public static String connstr_publisher = "Data Source=MYPC; Initial Catalog = QuanLiThuVien; Integrated Security = true; MultipleActiveResultSets=true";
         public static SqlDataReader myReader;
-        public static String servername = "localhost";
+        public static String servername = "MYPC";
         public static String username = "";
         public static String mlogin = "";
         public static String password = "";
@@ -56,7 +56,26 @@ namespace TTCS
 
 
         }
+        public static int KetNoi2()
+        {
+            if (Program.conn != null && Program.conn.State == ConnectionState.Open)
+                Program.conn.Close();
+            try
+            {
+                String connstrPublisher = "Data Source=MYPC ;Initial Catalog=QUANLITHUVIEN"
+                       + ";User ID=sa" + ";password=123";
+                Program.conn.ConnectionString = connstrPublisher;
+                Program.conn.Open();
+                return 1;
+            }
 
+            catch (Exception e)
+            {
+                MessageBox.Show("Lỗi kết nối cơ sở dữ liệu." + e.Message, "", MessageBoxButtons.OK);
+                //Console.WriteLine(e.Message);
+                return 0;
+            }
+        }
         public static SqlDataReader ExecSqlDataReader(String cmd)
         {
             SqlDataReader myreader;
@@ -101,6 +120,7 @@ namespace TTCS
             {
                 conn.Close();
                 Console.Write(sqlCmd);
+                MessageBox.Show(ex.ToString());
                 return ex.State;
             }
         }
