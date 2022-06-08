@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32126.315
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TTCS", "TTCS\TTCS.csproj", "{4E82F98E-C6A5-4165-8D6F-F6A4A075B962}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NganHangCSDLPT", "C:\Users\ACER\Desktop\CSDLPT_THAYTHU\NganHangCSDLPT\NganHangCSDLPT.csproj", "{59F7471B-1F14-4F48-8253-0E872C474D38}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericUndoRedo", "C:\Users\ACER\Desktop\CSDLPT_THAYTHU\GenericUndoRedo\GenericUndoRedo.csproj", "{E5323F74-C017-4AD0-9FA1-E53AB85B23BF}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{791DD5C4-60C7-471C-B32D-E49257D97F01}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,8 @@ Global
 		{E5323F74-C017-4AD0-9FA1-E53AB85B23BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5323F74-C017-4AD0-9FA1-E53AB85B23BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E5323F74-C017-4AD0-9FA1-E53AB85B23BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{791DD5C4-60C7-471C-B32D-E49257D97F01}.Debug|Any CPU.ActiveCfg = Debug
+		{791DD5C4-60C7-471C-B32D-E49257D97F01}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
