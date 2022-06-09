@@ -97,5 +97,10 @@ namespace TTCS
                 f.Show();
             }
         }
+
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
