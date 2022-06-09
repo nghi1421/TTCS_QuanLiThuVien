@@ -87,9 +87,10 @@ namespace CSPT_NGANHANG
             else
             {
                 MessageBox.Show("Đăng nhập thành công!", "Thông Báo", MessageBoxButtons.OK);
+                this.Visible = false;
 
             }
-            this.Visible = false;
+            
         }
 
         private void frmDangNhap_Load(object sender, EventArgs e)

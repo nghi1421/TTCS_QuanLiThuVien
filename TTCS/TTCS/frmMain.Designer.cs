@@ -50,6 +50,9 @@
             // 
             // ribbonControl1
             // 
+            // 
+            // 
+            // 
             this.ribbonControl1.ExpandCollapseItem.Id = 0;
             this.ribbonControl1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.ribbonControl1.ExpandCollapseItem,
@@ -119,13 +122,11 @@
             // 
             // ribbonPageGroup4
             // 
-            this.ribbonPageGroup4.ItemLinks.Add(this.btnDangNhap);
             this.ribbonPageGroup4.Name = "ribbonPageGroup4";
             // 
             // ribbonPageGroup5
             // 
             this.ribbonPageGroup5.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("ribbonPageGroup5.ImageOptions.SvgImage")));
-            this.ribbonPageGroup5.ItemLinks.Add(this.btnDangXuat);
             this.ribbonPageGroup5.Name = "ribbonPageGroup5";
             // 
             // ribbonPage1
@@ -140,17 +141,14 @@
             // 
             // ribbonPageGroup1
             // 
-            this.ribbonPageGroup1.ItemLinks.Add(this.btnLogin);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             // 
             // ribbonPageGroup2
             // 
-            this.ribbonPageGroup2.ItemLinks.Add(this.btnRole);
             this.ribbonPageGroup2.Name = "ribbonPageGroup2";
             // 
             // btnBackupRestore
             // 
-            this.btnBackupRestore.ItemLinks.Add(this.barButtonItem3);
             this.btnBackupRestore.Name = "btnBackupRestore";
             // 
             // xtraTabbedMdiManager1

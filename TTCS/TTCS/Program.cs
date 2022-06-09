@@ -54,7 +54,7 @@ namespace TTCS
                 Program.conn.Close();
             try
             {
-                String connstrPublisher = "Data Source=Localhost ;Initial Catalog=QUANLITHUVIEN"
+                String connstrPublisher = "Data Source=Localhost ;Initial Catalog=master"
                        + ";User ID=sa" + ";password=123123";
                 Program.conn.ConnectionString = connstrPublisher;
                 Program.conn.Open();
@@ -67,6 +67,34 @@ namespace TTCS
                 //Console.WriteLine(e.Message);
                 return 0;
             }
+        }
+        public static  Boolean checkdbexist()
+        {
+            if (Program.conn.State != ConnectionState.Open)
+            {
+                Program.conn.Open();
+            }
+            string cmd = "select case when DB_ID('quanlithuvien') IS NOT NULL then 1 else 0 end";
+            SqlCommand command = new SqlCommand(cmd, Program.conn);
+            SqlDataReader reader = command.ExecuteReader();
+            if (reader != null)
+            {
+                reader.Read();
+                int result = int.Parse(reader.GetValue(0).ToString());
+                if (result == 1)
+                {
+                    reader.Close();
+                    return true;
+                }
+                else
+                {
+                    reader.Close();
+                    return false;
+                }
+
+            }
+            return false;
+
         }
         public static SqlDataReader ExecSqlDataReader(String cmd)
         {
@@ -126,7 +154,8 @@ namespace TTCS
 
             BonusSkins.Register();
             SkinManager.EnableFormSkins();
-            KetNoi();
+            KetNoi2();
+            if (checkdbexist()) KetNoi();
             Application.Run(new frmMain());
             
         }

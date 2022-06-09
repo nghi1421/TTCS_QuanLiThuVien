@@ -14,9 +14,7 @@ namespace ttcs
 {
     public partial class Form1 : DevExpress.XtraEditors.XtraForm
     {
-        String cautruyvan="";
-        String location= "D:\\bktest";
-        int freq_type;
+      
         public Form1()
         {
             InitializeComponent();
@@ -100,7 +98,7 @@ namespace ttcs
                 }
                 else
                 {
-                    if(Program.KetNoi() ==0) MessageBox.Show("Error connecting database..!");
+                   // if(Program.KetNoi() ==0) MessageBox.Show("Error connecting database..!");
                     string cmd;
                     if (cbBKType.SelectedIndex == 0) cmd = "BACKUP DATABASE [" + Program.database + "] TO  DISK" +
                          " = N'" + bkLocation.Text + "\\QuanLiThuVien_FULL_" + DateTime.Now.ToString("yyyyMMddHHmm") + ".BAK'" +
@@ -159,17 +157,13 @@ namespace ttcs
                 txtFile1.Text = dlg.FileName;
             }
         }
+        
         string filedname = null;
         private void button4_Click(object sender, EventArgs e)
         {
+            Program.KetNoi2();
             try
             {
-                
-                if (Program.KetNoi() == 0)
-                {
-                    MessageBox.Show("Error connecting database..!");
-                    return;
-                }
                 if (Program.conn.State != ConnectionState.Open)
                 {
                     Program.conn.Open();
@@ -188,7 +182,7 @@ namespace ttcs
                     }
                     if (radioButton10.Checked)
                     {
-                        string sqlStmt2 = string.Format("ALTER DATABASE [" + Program.database + "] SET SINGLE_USER WITH ROLLBACK IMMEDIATE");
+                        /*string sqlStmt2 = string.Format("ALTER DATABASE [" + Program.database + "] SET SINGLE_USER WITH ROLLBACK IMMEDIATE");
                         SqlCommand bu2 = new SqlCommand(sqlStmt2, Program.conn);
                         bu2.ExecuteNonQuery();
 
@@ -198,23 +192,91 @@ namespace ttcs
 
                         string sqlStmt4 = string.Format("ALTER DATABASE [" + Program.database + "] SET MULTI_USER");
                         SqlCommand bu4 = new SqlCommand(sqlStmt4, Program.conn);
-                        bu4.ExecuteNonQuery();
-                    }else 
+                        bu4.ExecuteNonQuery();*/
+
+                        string sqlStmt3;
+                        if (Program.checkdbexist())
+                        {
+                            sqlStmt3 = "USE MASTER ALTER DATABASE [" + Program.database + "] SET SINGLE_USER WITH ROLLBACK IMMEDIATE" +
+                            " RESTORE DATABASE [" + Program.database + "] FROM DISK='" + txtFile1.Text + "'WITH REPLACE" +
+                            " ALTER DATABASE [" + Program.database + "] SET MULTI_USER ";
+                        }
+                        else sqlStmt3 = "RESTORE DATABASE[" + Program.database + "] FROM DISK = '" + txtFile1.Text + "'";
+                        SqlCommand bu3 = new SqlCommand(sqlStmt3, Program.conn);
+                        bu3.ExecuteNonQuery();
+                 
+                    }
+                    else
                     {
+
                         string sqlStmt2;
-                        sqlStmt2 = "USE MASTER " +
-                        "ALTER DATABASE[" + Program.database + "] SET SINGLE_USER WITH ROLLBACK IMMEDIATE" +
-                        " RESTORE DATABASE[" + Program.database + "] FROM " +
-                        " DISK = '" + txtFile1.Text + "'" +
-                        " WITH REPLACE, FILE = 1, NORECOVERY, NOUNLOAD, STATS = 5" +
-                        " RESTORE DATABASE[" + Program.database + "] FROM" +
-                        " DISK = '" + txtFile2.Text + "'" +
-                        " WITH FILE = 1, NOUNLOAD, STATS = 5" +
-                        " ALTER DATABASE[" + Program.database + "] SET MULTI_USER";
-                       
+                        if (Program.checkdbexist())
+                        {
+                            sqlStmt2 = "USE MASTER " +
+                             "ALTER DATABASE[" + Program.database + "] SET SINGLE_USER WITH ROLLBACK IMMEDIATE" +
+                             " RESTORE DATABASE[" + Program.database + "] FROM " +
+                             " DISK = '" + txtFile1.Text + "'" +
+                             " WITH REPLACE, FILE = 1, NORECOVERY, NOUNLOAD, STATS = 5" +
+                             " RESTORE DATABASE[" + Program.database + "] FROM" +
+                             " DISK = '" + txtFile2.Text + "'" +
+                             " WITH FILE = 1, NOUNLOAD, STATS = 5" +
+                             " ALTER DATABASE[" + Program.database + "] SET MULTI_USER";
+                            /* sqlStmt2 = " use master" +
+                             " ALTER DATABASE[QuanLiThuVien] SET SINGLE_USER WITH ROLLBACK IMMEDIATE" +
+                             " SET XACT_ABORT ON" +
+                             " BEGIN TRANSACTION" +
+                             " begin try" +
+                             " USE MASTER" +
+                             " RESTORE DATABASE[QuanLiThuVien] FROM" +
+                             " DISK = '" + txtFile1.Text + "' " +
+                             " WITH REPLACE, FILE = 1, NORECOVERY, NOUNLOAD, STATS = 5" +
+                             " RESTORE DATABASE[QuanLiThuVien] FROM" +
+                             " DISK = '" + txtFile2.Text + "' WITH FILE = 1," +
+                             " NOUNLOAD, STATS = 5" +
+                             " commit" +
+                             " end try" +
+                             " begin catch" +
+                             " rollback" +
+                             " DECLARE @ErrorMessage VARCHAR(2000)" +
+                             " SELECT @ErrorMessage = 'File differential backup cannot be restored because the database has not been restored to the correct earlier state !'" +
+                             " RAISERROR(@ErrorMessage, 16, 1)" +
+                             "  end catch" +
+                             " ALTER DATABASE[QuanLiThuVien] SET MULTI_USER";*/
+
+                        }
+                        else
+                        {
+                            sqlStmt2 = "USE MASTER " +
+                             " RESTORE DATABASE[" + Program.database + "] FROM " +
+                             " DISK = '" + txtFile1.Text + "'" +
+                             " WITH REPLACE, FILE = 1, NORECOVERY, NOUNLOAD, STATS = 5" +
+                             " RESTORE DATABASE[" + Program.database + "] FROM" +
+                             " DISK = '" + txtFile2.Text + "'" +
+                             " WITH FILE = 1, NOUNLOAD, STATS = 5";
+                            /*sqlStmt2 = " SET XACT_ABORT ON" +
+                            " BEGIN TRANSACTION" +
+                            " begin try" +
+                            " USE MASTER" +
+                            " RESTORE DATABASE[QuanLiThuVien] FROM" +
+                            " DISK = '" + txtFile1.Text + "' " +
+                            " WITH REPLACE, FILE = 1, NORECOVERY, NOUNLOAD, STATS = 5" +
+                            " RESTORE DATABASE[QuanLiThuVien] FROM" +
+                            " DISK = '" + txtFile2.Text + "' WITH FILE = 1," +
+                            " NOUNLOAD, STATS = 5" +
+                            " commit" +
+                            " end try" +
+                            " begin catch" +
+                            " rollback" +
+                            " DECLARE @ErrorMessage VARCHAR(2000)" +
+                            " SELECT @ErrorMessage = 'File differential backup cannot be restored because the database has not been restored to the correct earlier state !'" +
+                            " RAISERROR(@ErrorMessage, 16, 1)" +
+                            "  end catch";*/
+
+                        }
                         Console.WriteLine(sqlStmt2);
                         SqlCommand bu2 = new SqlCommand(sqlStmt2, Program.conn);
                         bu2.ExecuteNonQuery();
+                       
                     }
                     
 
@@ -222,19 +284,23 @@ namespace ttcs
                     txtFile1.Text = "";
                     txtFile2.Text = "";
                     Program.conn.Close();
-                   
+                    //Program.KetNoi();
+
                 }
                 catch (Exception ex)
                 {
                     //Console.WriteLine(ex);
                     MessageBox.Show(ex.ToString());
                     Program.conn.Close();
+                    //return;
                 }
 
             }
             catch (Exception ex) {
                 Console.WriteLine( ex.StackTrace);
+                //return;
             }
+            if (Program.checkdbexist()) Program.KetNoi();
         }
 
         private void label3_Click(object sender, EventArgs e)
