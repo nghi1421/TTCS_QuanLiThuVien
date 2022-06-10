@@ -97,5 +97,55 @@ namespace TTCS
                 f.Show();
             }
         }
+
+        private void barButtonItem1_ItemClick_1(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Program.KetNoi2();
+            if (!Program.checkdbexist())
+            {
+                MessageBox.Show("Database không tồn tại !");
+                return;
+            }
+            Program.KetNoi();
+            Form frm = this.CheckExists(typeof(frmRole));
+            if (frm != null) frm.Activate();
+            else
+            {
+                frmRole f = new frmRole();
+                f.MdiParent = this;
+                f.Show();
+            }
+        }
+
+        private void barButtonItem2_ItemClick_1(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Program.KetNoi2();
+            if (!Program.checkdbexist())
+            {
+                MessageBox.Show("Database không tồn tại !");
+                return;
+            }
+            Program.KetNoi();
+            Form frm = this.CheckExists(typeof(frmTK));
+            if (frm != null) frm.Activate();
+            else
+            {
+                frmTK f = new frmTK();
+                f.MdiParent = this;
+                f.Show();
+            }
+        }
+
+        private void barButtonItem4_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Form frm = this.CheckExists(typeof(Form1));
+            if (frm != null) frm.Activate();
+            else
+            {
+                Form1 f = new Form1();
+                f.MdiParent = this;
+                f.Show();
+            }
+        }
     }
 }
