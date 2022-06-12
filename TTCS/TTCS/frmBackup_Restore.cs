@@ -525,10 +525,10 @@ namespace ttcs
             }
             if (radioButton8.Checked)
                 sql = "use quanlithuvien exec back_up_full " + textBox1.Text + "," + freq_type.ToString() + "," + freq_interval + "," +
-                    subdaytype.ToString() + "," + subdayinterval + "," + freq_recurrence_factor + "," + f_relative_interval
+                    subdaytype.ToString() + "," + subdayinterval + "," + f_relative_interval + "," +freq_recurrence_factor 
                     + "," + startday + "," + endday + "," + starttime + "," + endtime;
             else sql = "use quanlithuvien exec back_up_diff " + textBox1.Text + "," + freq_type.ToString() + "," + freq_interval + "," +
-                subdaytype.ToString() + "," + subdayinterval + "," + freq_recurrence_factor + "," + f_relative_interval
+                subdaytype.ToString() + "," + subdayinterval + "," + f_relative_interval + "," + freq_recurrence_factor
                 + "," + startday + "," + endday + "," + starttime + "," + endtime;
             Console.WriteLine(sql);
             if (Program.ExecSqlNonQuery(sql) == 0)

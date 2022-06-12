@@ -142,7 +142,7 @@ namespace TTCS
             {
                 conn.Close();
                 Console.Write(sqlCmd);
-                MessageBox.Show(ex.ToString());
+  //              MessageBox.Show(ex.ToString());
                 return ex.State;
             }
         }
